@@ -1,2 +1,3 @@
-# MatchesPuzzleSolver
-Python Matches Puzzle Solver
+# MatchesEqualiationSolver
+
+**Description:** Python Matches Equaliation Solver
