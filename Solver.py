@@ -1,3 +1,5 @@
+import keyboard
+
 addTurns = {
     0: [8],
     1: [7],
@@ -40,7 +42,7 @@ replaceTurns = {
     3: [],
     4: [],
     5: [3],
-    6: [9],
+    6: [0, 9],
     7: [],
     8: [],
     9: [0, 6],
@@ -89,12 +91,8 @@ def checkEquality(arr_equality):
     return eval(curr) == arr_equality[len(arr_equality) - 1]
 
 
-arr = splitInput([char for char in input()])
-
-if checkEquality(arr):
-    print("Equality is correct.")
-
-else:
+def solve(arr):
+    global FAK
     for i in range(0, len(arr), 2):
         current_arr_for_check = arr.copy()
         elementToReplace = arr[i]
@@ -112,7 +110,7 @@ else:
                         current_arr_for_check[local_2] = listtonumber(current_arr_for_check[local_2])
 
                 if checkEquality(current_arr_for_check):
-                    printAnswer(current_arr_for_check)
+                    return current_arr_for_check
 
     for i in range(len(arr)):
         current_arr_for_check = arr.copy()
@@ -162,6 +160,22 @@ else:
 
                                     if isinstance(ReadyArr[local_222], list):
                                         ReadyArr[local_222] = listtonumber(ReadyArr[local_222])
-
                                 if checkEquality(ReadyArr):
-                                    printAnswer(ReadyArr)
+                                    return ReadyArr
+    return False
+
+
+arr = splitInput([char for char in input("Enter your equality:\n")])
+
+if checkEquality(arr):
+    print("Equality is correct.\n")
+else:
+    x = solve(arr)
+    if x:
+        printAnswer(x)
+        print("\n")
+    else:
+        print("No answer.\n")
+
+print("Press any key to exit...")
+keyboard.read_key()
