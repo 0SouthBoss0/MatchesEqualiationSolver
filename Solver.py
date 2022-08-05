@@ -91,8 +91,30 @@ def checkEquality(arr_equality):
     return eval(curr) == arr_equality[len(arr_equality) - 1]
 
 
+def changeInOne(number):
+    answer = []
+    number_arr = [int(char) for char in str(number)]
+    for i in range(len(number_arr)):
+        start = number_arr[i]
+        start_without = removeTurns[start]
+
+        for j in range(len(start_without)):
+            localarr = number_arr.copy()
+            localarr[i] = start_without[j]
+
+            for k in range(len(localarr)):
+                if i != k:
+                    finish = localarr[k]
+                    finish_with = addTurns[finish]
+                    for l in range(len(finish_with)):
+                        superarr = localarr.copy()
+                        superarr[k] = finish_with[l]
+                        answer.append(listtonumber(superarr))
+
+    return answer
+
+
 def solve(arr):
-    global FAK
     for i in range(0, len(arr), 2):
         current_arr_for_check = arr.copy()
         elementToReplace = arr[i]
@@ -162,6 +184,14 @@ def solve(arr):
                                         ReadyArr[local_222] = listtonumber(ReadyArr[local_222])
                                 if checkEquality(ReadyArr):
                                     return ReadyArr
+                    else:
+                        if arr[i] not in arithmetic:
+                            localcopy = arr.copy()
+                            sus = changeInOne(localcopy[i])
+                            for klmn in range(len(sus)):
+                                localcopy[i] = sus[klmn]
+                                if checkEquality(localcopy):
+                                    return localcopy
     return False
 
 
