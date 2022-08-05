@@ -1,58 +1,11 @@
 import keyboard
 
-addTurns = {
-    0: [8],
-    1: [7],
-    2: [],
-    3: [9],
-    4: [],
-    5: [6, 9],
-    6: [8],
-    7: [],
-    8: [],
-    9: [8],
-    "+": [],
-    "-": ["+"],
-    "=": [],
-    "*": [],
-    "/": []
-}
-removeTurns = {
-    0: [],
-    1: [],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: [5],
-    7: [1],
-    8: [0, 6, 9],
-    9: [3, 5],
-    "+": ["-"],
-    "-": [],
-    "=": [],
-    "*": [],
-    "/": []
-}
+import Data
 
-replaceTurns = {
-    0: [9],
-    1: [],
-    2: [3],
-    3: [],
-    4: [],
-    5: [3],
-    6: [0, 9],
-    7: [],
-    8: [],
-    9: [0, 6],
-    "+": [],
-    "-": [],
-    "=": [],
-    "*": [],
-    "/": []
-}
-arithmetic = ["+", "-", "*", "/", "="]
+addTurns = Data.addTurns
+removeTurns = Data.removeTurns
+replaceTurns = Data.replaceTurns
+arithmetic = Data.arithmetic
 
 
 def splitInput(equality):
