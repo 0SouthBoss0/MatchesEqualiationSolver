@@ -11,7 +11,9 @@ addTurns = {
     9: [8],
     "+": [],
     "-": ["+"],
-    "=": []
+    "=": [],
+    "*": [],
+    "/": []
 }
 removeTurns = {
     0: [],
@@ -26,7 +28,9 @@ removeTurns = {
     9: [3, 5],
     "+": ["-"],
     "-": [],
-    "=": []
+    "=": [],
+    "*": [],
+    "/": []
 }
 
 replaceTurns = {
@@ -42,15 +46,18 @@ replaceTurns = {
     9: [0, 6],
     "+": [],
     "-": [],
-    "=": []
+    "=": [],
+    "*": [],
+    "/": []
 }
+arithmetic = ["+", "-", "*", "/", "="]
 
 
 def splitInput(equality):
     parsed = []
     currency = ""
     for i in range(len(equality)):
-        if equality[i] != "+" and equality[i] != "-" and equality[i] != "=":
+        if equality[i] not in arithmetic:
             currency += equality[i]
         else:
             parsed.append(int(currency))
