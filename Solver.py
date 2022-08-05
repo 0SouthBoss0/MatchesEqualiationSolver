@@ -36,10 +36,10 @@ removeTurns = {
 replaceTurns = {
     0: [9],
     1: [],
-    2: [],
+    2: [3],
     3: [],
     4: [],
-    5: [],
+    5: [3],
     6: [9],
     7: [],
     8: [],
@@ -67,6 +67,15 @@ def splitInput(equality):
     return parsed
 
 
+def listtonumber(my_list):
+    c = 0
+    dic = 0
+    for i in range(len(my_list) - 1, -1, -1):
+        c += my_list[i] * 10 ** dic
+        dic += 1
+    return c
+
+
 def printAnswer(array):
     print(*array, sep="")
 
@@ -89,29 +98,70 @@ else:
     for i in range(0, len(arr), 2):
         current_arr_for_check = arr.copy()
         elementToReplace = arr[i]
-        possibleReplaces = replaceTurns[elementToReplace]
 
-        for j in range(len(possibleReplaces)):
-            current_arr_for_check[i] = possibleReplaces[j]
-            if checkEquality(current_arr_for_check):
-                printAnswer(current_arr_for_check)
+        for local in range(len(str(elementToReplace))):
+            possibleReplaces = replaceTurns[int(str(elementToReplace)[local])]
+
+            for j in range(len(possibleReplaces)):
+                currentnumber = [int(char) for char in str(elementToReplace)]
+                currentnumber[local] = possibleReplaces[j]
+                current_arr_for_check[i] = currentnumber
+
+                for local_2 in range(len(current_arr_for_check)):
+                    if isinstance(current_arr_for_check[local_2], list):
+                        current_arr_for_check[local_2] = listtonumber(current_arr_for_check[local_2])
+
+                if checkEquality(current_arr_for_check):
+                    printAnswer(current_arr_for_check)
 
     for i in range(len(arr)):
         current_arr_for_check = arr.copy()
         element_start = arr[i]
-        possibleTakes = removeTurns[element_start]
 
-        for j in range(len(possibleTakes)):
-            TakenArr = current_arr_for_check.copy()
-            TakenArr[i] = possibleTakes[j]
+        for local in range(len(str(element_start))):
+            if element_start not in arithmetic:
+                possibleTakes = removeTurns[int(str(element_start)[local])]
+            else:
+                possibleTakes = removeTurns[element_start]
 
-            for k in range(len(arr)):
-                if i != k:
-                    element_finish = arr[k]
-                    possibleGivings = addTurns[element_finish]
+            for j in range(len(possibleTakes)):
+                TakenArr = current_arr_for_check.copy()
 
-                    for l in range(len(possibleGivings)):
-                        ReadyArr = TakenArr.copy()
-                        ReadyArr[k] = possibleGivings[l]
-                        if checkEquality(ReadyArr):
-                            printAnswer(ReadyArr)
+                if element_start not in arithmetic:
+                    currentnumber = [int(char) for char in str(element_start)]
+                    currentnumber[local] = possibleTakes[j]
+                    TakenArr[i] = currentnumber
+                else:
+                    TakenArr[i] = possibleTakes[j]
+
+                for local_2 in range(len(TakenArr)):
+                    if isinstance(TakenArr[local_2], list):
+                        TakenArr[local_2] = listtonumber(TakenArr[local_2])
+
+                for k in range(len(arr)):
+                    if i != k:
+                        element_finish = arr[k]
+
+                        for local_777 in range(len(str(element_finish))):
+                            if element_finish not in arithmetic:
+                                possibleGivings = addTurns[int(str(element_finish)[local_777])]
+                            else:
+                                possibleGivings = addTurns[element_finish]
+
+                            for l in range(len(possibleGivings)):
+                                ReadyArr = TakenArr.copy()
+
+                                if element_finish not in arithmetic:
+                                    currentnumber = [int(char) for char in str(element_finish)]
+                                    currentnumber[local_777] = possibleGivings[l]
+                                    ReadyArr[k] = currentnumber
+                                else:
+                                    ReadyArr[k] = possibleGivings[l]
+
+                                for local_222 in range(len(ReadyArr)):
+
+                                    if isinstance(ReadyArr[local_222], list):
+                                        ReadyArr[local_222] = listtonumber(ReadyArr[local_222])
+
+                                if checkEquality(ReadyArr):
+                                    printAnswer(ReadyArr)
